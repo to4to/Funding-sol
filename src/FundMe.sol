@@ -11,16 +11,17 @@ contract FundMe{
     error FundMe_NotOwner();
 
   address  private immutable  i_owner;
-
-
+AggregatorV3Interface private s_priceFeed;
+address private imutable i_owner;
     modifier onlyOwner(){
 
         if(msg.sender!==i_owner) revert FundMe_NotOwner();
         _;
 
     }
-    constructor(){
-
+    constructor(address priceFeed){
+s_priceFeed= AggregatorV3Interface(priceFeed);
+i_owner=msg.sender;
     }
 
 }
